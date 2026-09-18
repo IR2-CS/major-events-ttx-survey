@@ -1,0 +1,524 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+h1, .block-title, .thank-you h2 {
+  font-family: "Noto Serif HK", "Songti TC", "SimSun", serif;
+}
+
+:root {
+  --bg: #030816;
+  --ink: #f8fbff;
+  --muted: #a9b8d8;
+  --card: rgba(8, 18, 43, 0.86);
+  --line: rgba(89, 151, 255, 0.34);
+  --accent: #35d7ff;
+  --accent-dark: #0877ff;
+  --purple: #8c5cff;
+  --gold: #ffe15d;
+  --error: #ff7a8a;
+  --success: #65f0b8;
+  --shadow: 0 26px 90px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(53, 215, 255, 0.22), transparent 28rem),
+    radial-gradient(circle at 86% 10%, rgba(140, 92, 255, 0.28), transparent 25rem),
+    radial-gradient(circle at 80% 88%, rgba(255, 225, 93, 0.12), transparent 23rem),
+    linear-gradient(135deg, #020511 0%, var(--bg) 48%, #08143a 100%);
+  font-family: "Public Sans", "Noto Sans HK", sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(53, 215, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 215, 255, 0.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.survey-shell {
+  position: relative;
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.survey-head {
+  margin-bottom: clamp(1.4rem, 3vw, 2rem);
+}
+
+.eyebrow {
+  margin: 0 0 0.9rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Noto Serif HK", serif;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  text-shadow: 0 0 24px rgba(53, 215, 255, 0.34);
+}
+
+.intro-copy {
+  max-width: 42rem;
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 2vw, 1.1rem);
+  line-height: 1.8;
+}
+
+.survey-card {
+  position: relative;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.2rem);
+  padding: clamp(1.25rem, 4vw, 2.4rem);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(10, 23, 58, 0.92), rgba(5, 11, 30, 0.92)),
+    var(--card);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+/* Block / Section */
+.block {
+  display: grid;
+  gap: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+
+.block-title {
+  margin: 0;
+  font-family: "Noto Serif HK", serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+}
+
+/* Field group */
+.field-group {
+  margin: 0;
+  border: none;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.field-group legend {
+  float: none;
+  width: auto;
+  padding: 0;
+  font-weight: 600;
+  font-size: clamp(0.92rem, 1.5vw, 1rem);
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.field-group legend span[aria-hidden="true"] {
+  color: var(--error);
+}
+
+/* Scale row (1-5) */
+.scale-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.scale-card {
+  flex: 1 0 0;
+  min-width: 5rem;
+}
+
+.scale-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scale-card span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.4rem;
+  background: rgba(53, 215, 255, 0.05);
+  border: 1px solid rgba(53, 215, 255, 0.18);
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+  line-height: 1.3;
+}
+
+.scale-card input:checked + span {
+  background: linear-gradient(135deg, rgba(53, 215, 255, 0.18), rgba(8, 119, 255, 0.14));
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(53, 215, 255, 0.22);
+}
+
+.scale-card input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.scale-card span:hover {
+  border-color: rgba(53, 215, 255, 0.5);
+  background: rgba(53, 215, 255, 0.09);
+}
+
+/* Radio row */
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.radio-card {
+  flex: 1 0 auto;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-card span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  background: rgba(53, 215, 255, 0.05);
+  border: 1px solid rgba(53, 215, 255, 0.18);
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.radio-card input:checked + span {
+  background: linear-gradient(135deg, rgba(53, 215, 255, 0.18), rgba(8, 119, 255, 0.14));
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(53, 215, 255, 0.22);
+}
+
+.radio-card input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.radio-card span:hover {
+  border-color: rgba(53, 215, 255, 0.5);
+  background: rgba(53, 215, 255, 0.09);
+}
+
+/* Other row (radio + text input) */
+.other-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.3rem;
+}
+
+.other-row .radio-card {
+  flex: 0 0 auto;
+}
+
+.other-input {
+  flex: 1 1 240px;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.18s;
+}
+
+.other-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(53, 215, 255, 0.15);
+}
+
+.other-input:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Textarea */
+.field-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-family: inherit;
+  line-height: 1.7;
+  resize: vertical;
+  transition: border-color 0.18s;
+}
+
+.field-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(53, 215, 255, 0.15);
+}
+
+.field-group label[for] {
+  font-weight: 600;
+  font-size: clamp(0.92rem, 1.5vw, 1rem);
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+/* Errors */
+.field-error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--error);
+  min-height: 1.2em;
+}
+
+/* Submit button */
+.form-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-width: 180px;
+  padding: 1rem 2.4rem;
+  border: none;
+  border-radius: 60px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--purple));
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.18s, transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 0 28px rgba(8, 119, 255, 0.24);
+}
+
+.submit-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.submit-button:not(:disabled):hover {
+  box-shadow: 0 0 36px rgba(8, 119, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.submit-button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.button-loader {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.is-loading .button-loader {
+  display: inline-block;
+}
+
+.is-loading .button-text {
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Form status */
+.form-status {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  min-height: 1.5em;
+}
+
+.form-status.is-error {
+  color: var(--error);
+}
+
+.form-status.is-success {
+  color: var(--success);
+}
+
+/* Thank you screen */
+.thank-you {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(10, 23, 58, 0.92), rgba(5, 11, 30, 0.92)),
+    var(--card);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.thank-you__label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--success);
+}
+
+.thank-you h2 {
+  margin: 0;
+  font-family: "Noto Serif HK", serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+}
+
+.thank-you p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .scale-row {
+    flex-direction: column;
+  }
+
+  .scale-card {
+    min-width: unset;
+  }
+
+  .radio-row {
+    flex-direction: column;
+  }
+
+  .radio-card span {
+    white-space: normal;
+  }
+}
+
+/* ─────────────────────────────────────
+   Mobile performance optimisations
+   Disable GPU-expensive effects on small
+   screens where they cause jank / slow paint
+   ───────────────────────────────────── */
+@media (max-width: 768px) {
+  /* backdrop-filter: blur() is the #1 mobile
+     performance killer — replace with solid bg */
+  .survey-card,
+  .thank-you {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(5, 11, 30, 0.97);
+  }
+
+  /* Simplify body to a single linear-gradient
+     (3 radial-gradients = 3 extra GPU layers) */
+  body {
+    background: linear-gradient(160deg, #020511, var(--bg) 55%, #0a1538);
+  }
+
+  /* Remove full-viewport grid overlay
+     (mask-image is very expensive on mobile) */
+  body::before {
+    display: none;
+  }
+
+  /* Reduce text-shadow blur radius */
+  h1 {
+    text-shadow: 0 0 10px rgba(53, 215, 255, 0.18);
+  }
+
+  /* Lighter box-shadows (smaller blur = less paint) */
+  .survey-card,
+  .thank-you {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .scale-card input:checked + span,
+  .radio-card input:checked + span {
+    box-shadow: 0 0 10px rgba(53, 215, 255, 0.12);
+  }
+
+  .submit-button {
+    box-shadow: 0 0 16px rgba(8, 119, 255, 0.16);
+  }
+
+  .submit-button:not(:disabled):hover {
+    box-shadow: 0 0 20px rgba(8, 119, 255, 0.22);
+  }
+
+  /* Drop box-shadow from transitions (GPU-cheap) */
+  .scale-card span,
+  .radio-card span {
+    transition: background 0.12s, border-color 0.12s;
+  }
+}
+
+/* Respect users' reduced-motion OS setting */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
